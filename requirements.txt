@@ -1,0 +1,14 @@
+# --- Core numerical & data libraries ---
+numpy>=1.26
+pandas>=2.2
+
+# --- Deep‑learning framework ---
+torch>=2.2          # CUDA builds: install torch+cu11x or cu12x wheels as needed
+
+# --- EEG / biosignal I/O ---
+brainflow>=5.8.0    # BoardShim, DataFilter, synthetic boards, etc.
+
+# (BrainFlow pulls in its own helpers like pyserial and requests.)
+
+# --- Optional, handy extras ---
+# matplotlib>=3.9   # Uncomment if you plan on plotting signals
