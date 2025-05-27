@@ -12,3 +12,5 @@ brainflow>=5.8.0    # BoardShim, DataFilter, synthetic boards, etc.
 
 # --- Optional, handy extras ---
 # matplotlib>=3.9   # Uncomment if you plan on plotting signals
+PyYAML>=6.0 # For parsing the configuration file
+scikit-learn>=1.0 # For data splitting and label encoding

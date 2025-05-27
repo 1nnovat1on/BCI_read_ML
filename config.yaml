@@ -1,0 +1,44 @@
+# Configuration for EEG Word Classification Experiment
+
+# Data Acquisition Parameters (for word_flash.py)
+data_acquisition:
+  board_id: 22 # Synthetic board by default (BoardIds.SYNTHETIC_BOARD.value)
+  # serial_port: "/dev/ttyUSB0" # Example for a real board, commented out
+  # mac_address: "XX:XX:XX:XX:XX:XX" # Example for a real board, commented out
+  recording_duration_s: 4 # Duration to record EEG for each word
+  inter_trial_interval_s: 1 # Pause between flashing words
+  experiment_base_dir: "experiment_data" # Base directory to save recordings
+  word_list_file: "word_lists/default_words.txt" # Path to the list of words
+
+# Data Processing Parameters (for preprocess_data.py)
+data_processing:
+  # Filter settings
+  low_cut_hz: 0.5       # Low cut-off frequency for bandpass filter
+  high_cut_hz: 40.0     # High cut-off frequency for bandpass filter
+  notch_freq_hz: 50.0   # Notch filter frequency (e.g., 50Hz or 60Hz for power line noise)
+  filter_order: 5       # Order of the Butterworth filter
+  # Epoching
+  epoch_tmin_s: -0.5    # Start time of epoch relative to event (word onset)
+  epoch_tmax_s: 2.0     # End time of epoch relative to event
+  # Normalization (options: 'none', 'zscore_channel', 'zscore_all')
+  normalization_method: "zscore_channel"
+
+# Model Training Parameters (for train_model.py and BrainWaveNet.py)
+model_training:
+  # Model Architecture (BrainWaveNet hyperparameters)
+  input_channels: 1 # Number of EEG channels used (after selection if any)
+  num_filters: 32
+  lstm_hidden_size: 64
+  # num_classes: 50 # This should be dynamically set based on the word list size
+  dropout_p: 0.4
+  # Training settings
+  learning_rate: 0.001
+  batch_size: 32
+  num_epochs: 100
+  # Data splitting
+  validation_split: 0.2 # Proportion of data for validation (e.g., 0.2 for 20%)
+  # Could be 'random' or 'participant_wise' if participant info is available and useful for splitting
+  split_strategy: "random" 
+
+# General settings
+random_seed: 42
